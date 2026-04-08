@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Интерактивное приглашение на День Рождения</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #EED5B9;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .one {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .telephone1 {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .telephone1 .main-image {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .telephone1 .bow-left-top {
+            position: absolute;
+            left: -5%;
+            top: -1%;
+            width: 45%;
+            height: auto;
+            z-index: 2;
+        }
+        
+        .telephone1 .bow-right-top {
+            position: absolute;
+            right: -2%;
+            top: 19%;
+            width: 20%;
+            height: auto;
+            z-index: 2;
+        }
+        
+        .telephone1 .bow-right-bottom {
+            position: absolute;
+            right: 3%;
+            bottom: 28%;
+            width: 35%;
+            height: auto;
+            z-index: 2;
+        }
+
+        .telephone1 .invitation {
+            position: absolute;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 300px;
+            z-index: 3;
+        }
+        
+        .telephone1 .checkmark {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12%;
+            max-width: 50px;
+            z-index: 3;
+        }
+
+        .komp1 {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .komp1 .main-image {
+            width: 50%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .komp1 .bow-left-top {
+            position: absolute;
+            left: 5%;
+            top: 8%;
+            width: 32%;
+            height: auto;
+            z-index: 2;
+        }
+        
+        .komp1 .bow-right-bottom {
+            position: absolute;
+            right: 5%;
+            bottom: 12%;
+            width: 35%;
+            height: auto;
+            z-index: 2;
+        }
+
+        .komp1 .invitation {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            max-width: 550px;
+            z-index: 3;
+        }
+        
+        .komp1 .checkmark {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6%;
+            max-width: 50px;
+            z-index: 3;
+        }
+
+        section:not(.one) {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .komp1, .komp2, .komp3, .komp4, .komp5, .komp6, .komp7, .komp8 {
+            display: none !important;
+        }
+
+        .telephone1, .telephone2, .telephone3, .telephone4, .telephone5, .telephone6, .telephone7, .telephone8 {
+            display: flex !important;
+        }
+
+        .telephone2, .telephone3, .telephone4, .telephone5, .telephone6, .telephone7, .telephone8 {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .telephone2 img:first-child {
+            width: 85%;
+            max-width: 1000px;
+            margin-bottom: 22px;
+        }
+        
+        .telephone2 img:last-child {
+            width: 94%;
+            max-width: 900px;
+        }
+
+        .telephone3 img, .telephone4 img, .telephone5 img, 
+        .telephone6 img, .telephone7 img, .telephone8 img {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+        
+        .telephone4 img:first-child,
+        .telephone6 img:first-child {
+            margin-bottom: 20px;
+        }
+
+            .sections-with-bg {
+            position: relative;
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: 100% auto;
+            background-image: url('image/длявсехсекций.svg');
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .real-map {
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 2px solid #fff;
+            background: #e8ddd0;
+        }
+        
+        .real-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* Базовые стили для карты на телефоне — центрирование */
+        .telephone6 .real-map {
+            max-width: 92%;
+            width: 92%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .telephone6 .real-map iframe {
+            height: 200px;
+        }
+
+        /* ПОДНЯТЬ СЕКЦИЮ С КАРТОЙ — ВАШИ НАСТРОЙКИ */
+        .six {
+            margin-top: -10px !important;
+            margin-bottom: -40px !important;
+        }
+
+        /* ОСНОВНОЙ ПОДЪЁМ СЕКЦИИ 6 НА ТЕЛЕФОНЕ — УВЕЛИЧИЛ ЗНАЧЕНИЕ */
+        .telephone6 {
+            margin-top: -120px !important;
+            margin-bottom: -30px !important;
+        }
+
+        .komp6 {
+            margin-top: -300px !important;
+            margin-bottom: -50px !important;
+        }
+
+        .sections-with-bg > section.six {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        /* СЕКЦИЯ 7 - УВЕЛИЧЕННЫЙ РАЗМЕР + ПОДНЯТИЕ */
+        .telephone7 img {
+            width: 95% !important;
+            max-width: 500px !important;
+            display: block !important;
+            margin: 0 auto !important;
+            margin-top: -40px !important;
+        }
+        
+
+        /* ========= ПОСЛЕДНЯЯ СЕКЦИЯ (eight) ========= */
+        .telephone8 img {
+            width: 88% !important;
+            max-width: 520px !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Десктопная версия — картинка крупнее */
+        @media (min-width: 768px) {
+            .komp8 img {
+                width: 80% !important;
+                max-width: 1000px !important;
+                display: block !important;
+                margin: 20px auto !important;
+            }
+            
+            @media (min-width: 1200px) {
+                .komp8 img {
+                    width: 85% !important;
+                    max-width: 1300px !important;
+                }
+            }
+        }
+
+        @media (min-width: 768px) {
+            .telephone1, .telephone2, .telephone3, .telephone4, .telephone5, .telephone6, .telephone7, .telephone8 {
+                display: none !important;
+            }
+            
+            .komp1, .komp2, .komp3, .komp4, .komp5, .komp6, .komp7, .komp8 {
+                display: flex !important;
+            }
+            
+            .komp2, .komp3, .komp4, .komp5, .komp6, .komp7, .komp8 {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+                .sections-with-bg {
+                background-image: url('images/фонкомп.svg') !important;
+                background-repeat: no-repeat !important;
+                background-size: 100% auto !important;
+                width: 100vw;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
+            }
+            
+            .komp2 img:first-child {
+                width: 50%;
+                max-width: 700px;
+                margin-bottom: 35px;
+            }
+            
+            .komp2 img:last-child {
+                width: 100%;
+                max-width: 1500px;
+            }
+            
+            .komp3 img {
+                width: 70%;
+                max-width: 800px;
+            }
+            
+            .komp4 img:first-child {
+                width: 50%;
+                max-width: 400px;
+                margin-bottom: 30px;
+            }
+            
+            .komp4 img:last-child {
+                width: 80%;
+                max-width: 700px;
+            }
+            
+            .komp6 .real-map {
+                max-width: 800px;
+                width: 90%;
+                margin: 25px auto;
+                border-radius: 28px;
+                border-width: 3px;
+            }
+            .komp6 .real-map iframe {
+                height: 400px;
+            }
+            
+            .komp6 img:first-child {
+                width: 45%;
+                max-width: 650px;
+                margin-bottom: 15px;
+            }
+            
+            .komp6 img:nth-child(3) {
+                width: 85%;
+                max-width: 750px;
+                margin: 10px 0;
+            }
+            
+            .komp6 img:nth-child(4) {
+                width: 25%;
+                max-width: 200px;
+                margin: 15px 0;
+            }
+            
+            .komp6 img:nth-child(5) {
+                width: 35%;
+                max-width: 400px;
+                margin: 10px 0;
+            }
+            
+            .komp7 img {
+                width: 115%;
+                max-width: 1500px;
+                display: block;
+                margin: 0 auto;
+                margin-top: -90px !important;
+            }
+            
+            .komp8 img {
+                width: 70%;
+                max-width: 800px;
+            }
+        }
+
+        section:not(.one) {
+            margin-bottom: 16px;
+        }
+        
+        .eight {
+            margin-bottom: 0;
+        }
+        
+        .sections-with-bg > section:not(.one) {
+            padding: 30px 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .telephone3 img {
+            width: 150% !important;
+            /* max-width: 380px !important; */
+            display: block !important;
+            
+        }
+        
+        .komp3 img {
+            width: 155% !important;
+            max-width: 1800px !important;
+            display: block !important;
+        }
+        
+        .telephone3 {
+            margin-top: -105px !important;
+            margin-bottom: -30px !important;
+            z-index: 1;
+        }
+        
+        .komp3 {
+            margin-top: -100px !important;
+            margin-bottom: -40px !important;
+            z-index: 1;
+        }
+        
+        .telephone4 img:first-child {
+            width: 100% !important;
+            max-width: 375px !important;
+            margin: 0 auto 15px auto !important;
+            display: block !important;
+        }
+        
+        .telephone4 img:last-child {
+            width: 80% !important;
+            max-width: 220px !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+        
+        @media (min-width: 768px) {
+            .komp4 img:first-child {
+                width: 95% !important;
+                max-width: 1100px !important;
+                margin: 0 auto 20px auto !important;
+                display: block !important;
+            }
+            
+            .komp4 img:last-child {
+                width: 75% !important;
+                max-width: 750px !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+        }
+        
+        .four {
+            margin: 0 !important;
+            padding: 30px 0 !important;
+        }
+        
+        .telephone4 {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .four {
+            margin-top: -87px !important;
+        }
+        
+        @media (min-width: 768px) {
+            .four {
+                margin-top: -310px !important;
+            }
+        }
+        
+        .telephone4 img:last-child {
+            position: relative !important;
+            top: -10px !important;
+        }
+        
+        @media (min-width: 768px) {
+            .komp4 img:last-child {
+                position: relative !important;
+                top: -10px !important;
+            }
+        }
+        
+        .telephone5 {
+            overflow-x: visible !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        .telephone5 img {
+            width: 100% !important;
+            max-width: 550px !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+
+        @media (min-width: 768px) {
+            .komp5 {
+                overflow-x: visible !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                text-align: center !important;
+            }
+            
+            .komp5 img {
+                width: 100% !important;
+                max-width: none !important;
+                min-width: 100% !important;
+                display: block !important;
+                margin: 0 auto !important;
+            }
+        }
+
+        .five {
+            margin-top: -190px !important;
+            margin-bottom: -30px !important;
+        }
+
+        @media (min-width: 768px) {
+            .five {
+                margin-top: -680px !important;
+                margin-bottom: -50px !important;
+            }
+        }
+        
+        /* НАСТРОЙКИ ДЛЯ КАРТИНОК ВНУТРИ СЕКЦИИ 6 (телефон) */
+        .telephone6 img:first-child {
+            width: 40% !important;
+            margin-bottom: -10px !important;
+        }
+        
+        .telephone6 img:nth-child(3) {
+            width: 85% !important;
+            max-width: 300px !important;
+            margin: 5px 0;
+        }
+        
+        .telephone6 img:nth-child(4) {
+            width: 35% !important;
+            max-width: 90px !important;
+            margin: 8px 0;
+        }
+        
+        .telephone6 img:nth-child(5) {
+            width: 40% !important;
+            max-width: 250px !important;
+            margin: 5px 0;
+        }
+
+        /* Поднять картинку в последней секции на телефоне */
+        .telephone8 img {
+            margin-top: -85px !important;
+        }
+
+        /* Поднять картинку на компьютере */
+        @media (min-width: 768px) {
+            .komp8 img {
+                margin-top: -280px !important;
+            }
+        }
+
+        /* Футер — уже по ширине */
+        footer {
+            background: #EED5B9;
+            padding: 2rem 1rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .footer-line {
+            font-size: 0.85rem;
+            color: #706760;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-line:first-child {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-line:last-child {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        /* Убрать лишний отступ сверху, чтобы стрелка была видна */
+        .one {
+            min-height: 95vh !important;
+        }
+
+        .telephone1 .checkmark {
+            bottom: 8% !important;
+        }
+
+        .komp1 .checkmark {
+            bottom: 12% !important;
+        }
+
+        @media (min-width: 768px) {
+            .one {
+                min-height: 90vh !important;
+            }
+        }
+
+        /* На компьютере опустить стрелку и сделать кликабельной */
+        @media (min-width: 768px) {
+            .komp1 .checkmark {
+                bottom: 5% !important;
+            }
+            
+            .komp1 {
+                position: relative;
+            }
+        }
+
+                /* ========= НОВЫЕ СТИЛИ ДЛЯ АНИМАЦИИ ПРИ СКРОЛЛЕ ========= */
+        .sections-with-bg {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Изначально все секции (кроме первой) скрыты */
+        .sections-with-bg section {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.95, 0.4, 1.05), 
+                        transform 0.7s cubic-bezier(0.25, 0.95, 0.4, 1.05);
+        }
+
+        /* Когда секция становится видимой */
+        .sections-with-bg section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Футер тоже с анимацией */
+        footer {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        /* Галочка остаётся просто украшением — убираем блокировку скролла */
+        body.no-scroll,
+        body.scroll-enabled {
+            overflow: auto !important;
+            position: relative !important;
+            height: auto !important;
+        }
+        
+        .three {
+    position: relative;
+    z-index: 10;
+    margin-bottom: -50px;
+}
+
+.four {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+/* Защита для очень узких экранов (до 360px) */
+@media (max-width: 360px) {
+    .telephone3 {
+        overflow-x: visible !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+    }
+    .telephone7 img {
+        margin-top: -20px !important;
+    }
+}
+
+
+
+
+
+
+/* Опустить вторую секцию */
+.telephone2 {
+    margin-top: 50px !important;
+}
+
+@media (min-width: 768px) {
+    .komp2 {
+        margin-top: 90px !important;
+    }
+}
+
+
+/* Опустить третью секцию */
+.telephone3 {
+    margin-top: -45px !important;
+}
+
+@media (min-width: 768px) {
+    .komp3 {
+        margin-top: -170px !important;
+    }
+}
+
+.telephone4 {
+    margin-top: -10px !important;
+}
+@media (min-width: 768px) {
+    .komp4 {
+        margin-top: 70px !important; /* или отрицательное, если поднять */
+    }
+}
+/* Настройки для 5-й секции */
+.telephone5 {
+    margin-top: 25px !important;  
+}
+
+@media (min-width: 768px) {
+    .komp5 {
+        margin-top: 190px !important;
+    }
+}
+
+/* Настройки для 6-й секции */
+.telephone6 {
+    margin-top: -30px !important;  
+}
+
+@media (min-width: 768px) {
+    .komp6 {
+        margin-top: -70px !important;
+    }
+}
+
+/* Настройки для 7-й секции */
+.telephone7 {
+    margin-top: 40px !important;  
+}
+
+@media (min-width: 768px) {
+    .komp7 {
+        margin-top: -30px !important;
+    }
+}
+
+/* Настройки для 8-й секции */
+.telephone8 {
+    margin-top: 50px !important;  
+}
+
+@media (min-width: 768px) {
+    .komp8 {
+        margin-top: 390px !important;
+    }
+}
+
+
+
+/* Новая секция между 7 и 8 — телефон */
+.telephonenew {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.telephonenew img {
+    width: 85%;
+    max-width: 450px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Новая секция — компьютер (по умолчанию скрыта) */
+.kompnew {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    .telephonenew {
+        display: none !important;
+    }
+    .kompnew {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .kompnew img {
+        width: 70%;
+        max-width: 800px;
+    }
+}
+
+
+.telephonenew {
+    margin-top: -120px !important;  /* положительное = опустить */
+}
+
+@media (min-width: 768px) {
+    .kompnew {
+        margin-top: -300px !important;
+    }
+}
+
+
+/* Новая секция — картинка на всю ширину экрана */
+.telephonenew {
+    max-width: none !important;
+    width: 100% !important;
+}
+
+.telephonenew img {
+    width: 100% !important;
+    max-width: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+@media (min-width: 768px) {
+    .kompnew {
+        max-width: none !important;
+        width: 100% !important;
+    }
+    .kompnew img {
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <section class="one">
+        <div class="telephone1">
+            <img src="image/бантглавнлев.svg" alt="" class="bow-left-top">
+            <img src="image/бантглавправмал.svg" alt="" class="bow-right-top">
+            <img src="image/бантглавправ.svg" alt="" class="bow-right-bottom">
+            <img src="image/полька 1.svg" alt="" class="main-image">
+            <img src="image/Приглашение на день рождение!.svg" alt="" class="invitation">
+            <img src="image/галочка.svg" alt="" class="checkmark">
+        </div>
+        <div class="komp1">
+            <img src="images/бантлевкомп.svg" alt="" class="bow-left-top">
+            <img src="images/бантправкомп.svg" alt="" class="bow-right-bottom">
+            <img src="images/полька 2.svg" alt="" class="main-image">
+            <img src="images/Приглашение на день рождение!комп.svg" alt="" class="invitation">
+            <img src="images/галочкакомп.svg" alt="" class="checkmark">
+        </div>
+    </section>
+
+    <div class="sections-with-bg">
+        
+        <section class="two">
+            <div class="telephone2">
+                <img src="image/Дорогие гости!.svg" alt="">
+                <img src="image/втораясекция.svg" alt="">
+            </div>
+            <div class="komp2">
+                <img src="images/Дорогие гости!комп.svg" alt="">
+                <img src="images/длявторойсекциикомп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="three">
+            <div class="telephone3">
+                <img src="image/линия1.svg" alt="">
+            </div>
+            <div class="komp3">
+                <img src="images/линия1комп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="four">
+            <div class="telephone4">
+                <img src="image/календарь.svg" alt="">
+                <img src="image/Праздник состоится 30 мая 2026г.svg" alt="">
+            </div>
+            <div class="komp4">
+                <img src="images/календарькомп.svg" alt="">
+                <img src="images/Праздник состоится 30 мая 2026гкомп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="five">
+            <div class="telephone5">
+                <img src="image/линиясбантиками.svg" alt="">
+            </div>
+            <div class="komp5">
+                <img src="images/линиясбантамикомп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="six">
+            <div class="telephone6">
+                <img src="image/Место встречи.svg" alt="">
+                
+                <div class="real-map">
+                    <iframe 
+                        src="https://yandex.ru/map-widget/v1/?ll=60.569573%2C56.902934&z=18&pt=60.569573%2C56.902934%2Cpm2rdm&balloonContent=%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C%201"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <img src="image/праздноватьбудемвAVSОтель.svg" alt="">
+                <img src="image/Шале №3.svg" alt="">
+                <img src="image/Республиканская, 1.svg" alt="">
+            </div>
+            <div class="komp6">
+                <img src="images/Место встречикомп.svg" alt="">
+                
+                <div class="real-map">
+                    <iframe 
+                        src="https://yandex.ru/map-widget/v1/?ll=60.569573%2C56.902934&z=18&pt=60.569573%2C56.902934%2Cpm2rdm&balloonContent=%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C%201"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <img src="images/праздноватьбудемвAVSОтелькомп.svg" alt="">
+                <img src="images/Шале%20№3комп.svg" alt="">
+                <img src="images/Республиканская,%201комп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="seven">
+            <div class="telephone7">
+                <img src="image/время.svg" alt="">
+            </div>
+            <div class="komp7">
+                <img src="images/времякомп.svg" alt="">
+            </div>
+        </section>
+
+        <section class="new">
+            <div class="telephonenew">
+                <img src="image/полосочка.svg" alt="">
+            </div>
+            <div class="kompnew">
+                <img src="images/полосочка.svg" alt="">
+            </div>
+        </section>
+
+        <section class="eight">
+            <div class="telephone8">
+                <img src="image/концовка.svg" alt="">
+            </div>
+            <div class="komp8">
+                <img src="images/концовкакомп.svg" alt="">
+            </div>
+        </section>
+        
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-line">Поля, 20 лет | 30 мая 2026 (сб) | 14:00</div>
+            <div class="footer-line">design by Polina | 2026</div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Находим все секции внутри контейнера (кроме первой)
+            const sections = document.querySelectorAll('.sections-with-bg section');
+            const footer = document.querySelector('footer');
+            
+            // Проверяем, есть ли поддержка Intersection Observer
+            if (!window.IntersectionObserver) {
+                // fallback: показываем всё сразу, если браузер старый
+                sections.forEach(section => {
+                    section.classList.add('revealed');
+                });
+                return;
+            }
+            
+            // Настройки наблюдателя: когда элемент появляется в области видимости
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        // После появления можно продолжить наблюдать (на случай, если нужно)
+                        // Но можно и отключить наблюдение за этим элементом:
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,      // когда 15% секции показалось — запускаем анимацию
+                rootMargin: '0px 0px -30px 0px'  // небольшой отрицательный отступ снизу
+            });
+            
+            // Начинаем наблюдать за каждой секцией
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Футер тоже с анимацией (появляется, когда доскроллили до него)
+            if (footer) {
+                observer.observe(footer);
+            }
+            
+            // Для красоты: если пользователь уже прокрутил страницу до какой-то секции
+            // (например, при перезагрузке), проверяем видимость вручную
+            setTimeout(() => {
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    if (rect.top < windowHeight - 100) {
+                        section.classList.add('revealed');
+                        observer.unobserve(section);
+                    }
+                });
+                if (footer) {
+                    const footerRect = footer.getBoundingClientRect();
+                    if (footerRect.top < window.innerHeight - 100) {
+                        footer.classList.add('revealed');
+                        observer.unobserve(footer);
+                    }
+                }
+            }, 200);
+            
+            console.log('✨ Анимация при скролле активирована! Секции будут появляться плавно.');
+        })();
+    </script>
+
+                <!-- Конфетти (красивые и медленные) -->
+<script>
+    (function() {
+        console.log('Скрипт конфетти загружен');
+        
+        let confettiShown = false;
+        
+        function shootConfetti() {
+            console.log('ЗАПУСКАЕМ КОНФЕТТИ! 🎉');
+            
+            const colors = ['#ffb3ba', '#c7e9fb', '#fdfd97', '#b5ead7', '#ffdac1', '#ff9aa2', '#ffd1dc', '#d4f1f9', '#e6c8a0'];
+            
+            // Создаём 180 конфетти, которые падают сверху
+            for (let i = 0; i < 180; i++) {
+                const confetti = document.createElement('div');
+                
+                // Случайные размеры (от 4 до 14 пикселей)
+                const size = Math.random() * 10 + 4;
+                // Случайная горизонтальная позиция (от левого до правого края)
+                const startX = Math.random() * window.innerWidth;
+                // Случайная задержка перед началом падения (чтобы не все сразу)
+                const delay = Math.random() * 800;
+                // Скорость падения (от 3 до 7 секунд)
+                const duration = Math.random() * 4 + 3;
+                // Смещение в сторону при падении
+                const driftX = (Math.random() - 0.5) * 250;
+                
+                confetti.style.position = 'fixed';
+                confetti.style.left = startX + 'px';
+                confetti.style.top = '-20px';
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                confetti.style.zIndex = '99999';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.opacity = '0.9';
+                confetti.style.transition = 'none';
+                document.body.appendChild(confetti);
+                
+                // Запускаем падение с задержкой
+                setTimeout(() => {
+                    confetti.style.transition = `all ${duration}s cubic-bezier(0.4, 0.8, 0.5, 1)`;
+                    confetti.style.transform = `translate(${driftX}px, ${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg)`;
+                    confetti.style.opacity = '0';
+                }, delay);
+                
+                // Удаляем после падения
+                setTimeout(() => {
+                    if (confetti.parentNode) confetti.remove();
+                }, delay + duration * 1000 + 500);
+            }
+        }
+        
+        function initConfetti() {
+            const secondSection = document.querySelector('.two');
+            console.log('Секция .two найдена?', secondSection);
+            
+            if (!secondSection) {
+                setTimeout(initConfetti, 500);
+                return;
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !confettiShown) {
+                        confettiShown = true;
+                        shootConfetti();
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            observer.observe(secondSection);
+            console.log('Наблюдение за .two запущено');
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initConfetti);
+        } else {
+            initConfetti();
+        }
+    })();
+</script>
+
+    <!-- ПРЕЛОАДЕР - экран загрузки -->
+<style>
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #EED5B9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 999999;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    
+    .preloader.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    /* Вариант 2 - надпись с точками */
+    .preloader-text {
+        font-size: 1.3rem;
+        color: #8B7A6B;
+        font-weight: 400;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .dots {
+        display: inline-block;
+        width: 45px;
+        text-align: left;
+    }
+    
+    /* Анимация для точек */
+    .dot {
+        display: inline-block;
+        animation: bounce 1.4s infinite;
+    }
+    .dot:nth-child(1) { animation-delay: 0s; }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes bounce {
+        0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+        30% { transform: translateY(-8px); opacity: 1; }
+    }
+    
+    /* Вариант 3 - мерцающий бантик */
+    .preloader-bow {
+        width: 60px;
+        height: 60px;
+        background-image: url('image/бантглавнлев.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        animation: glow 1.2s ease-in-out infinite;
+        margin-bottom: 20px;
+    }
+    
+    @keyframes glow {
+        0%, 100% { 
+            opacity: 0.4;
+            transform: scale(0.9);
+        }
+        50% { 
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+    
+    /* Маленькая подпись под бантиком */
+    .preloader-sub {
+        font-size: 0.8rem;
+        color: #B8A088;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="preloader" id="preloader">
+    <!-- Сначала показываем вариант 3 (бантик) -->
+    <div id="bowVersion" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="preloader-bow"></div>
+        <div class="preloader-sub">загружаем...</div>
+    </div>
+    
+    <!-- А потом показываем вариант 2 (надпись) - изначально скрыт -->
+    <div id="textVersion" style="display: none; flex-direction: column; align-items: center;">
+        <div class="preloader-text">
+            Загружаем приглашение
+            <span class="dots">
+                <span class="dot">●</span>
+                <span class="dot">●</span>
+                <span class="dot">●</span>
+            </span>
+        </div>
+        <div class="preloader-bow" style="width: 40px; height: 40px;"></div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const preloader = document.getElementById('preloader');
+        const bowVersion = document.getElementById('bowVersion');
+        const textVersion = document.getElementById('textVersion');
+        
+        let imagesLoaded = false;
+        let timerExpired = false;
+        
+        // Сначала показываем бантик на 1.2 секунды
+        setTimeout(() => {
+            if (!imagesLoaded) {
+                // Плавно меняем с бантика на надпись
+                bowVersion.style.transition = 'opacity 0.4s';
+                textVersion.style.transition = 'opacity 0.4s';
+                
+                bowVersion.style.opacity = '0';
+                setTimeout(() => {
+                    bowVersion.style.display = 'none';
+                    textVersion.style.display = 'flex';
+                    textVersion.style.opacity = '0';
+                    setTimeout(() => {
+                        textVersion.style.opacity = '1';
+                    }, 10);
+                }, 400);
+            }
+        }, 1200);
+        
+        // Считаем все картинки на странице
+        const allImages = document.querySelectorAll('img');
+        let loadedCount = 0;
+        const totalImages = allImages.length;
+        
+        function checkAllLoaded() {
+            loadedCount++;
+            if (loadedCount >= totalImages) {
+                imagesLoaded = true;
+                // Ждём ещё немного для плавности, потом скрываем прелоадер
+                setTimeout(() => {
+                    preloader.classList.add('hide');
+                    setTimeout(() => {
+                        if (preloader.parentNode) preloader.remove();
+                    }, 600);
+                }, 500);
+            }
+        }
+        
+        // Если картинок нет, просто скрываем через 2 секунды
+        if (totalImages === 0) {
+            setTimeout(() => {
+                preloader.classList.add('hide');
+                setTimeout(() => preloader.remove(), 600);
+            }, 2000);
+        } else {
+            // Для каждой картинки проверяем загрузку
+            allImages.forEach(img => {
+                if (img.complete) {
+                    checkAllLoaded();
+                } else {
+                    img.addEventListener('load', checkAllLoaded);
+                    img.addEventListener('error', checkAllLoaded); // даже если ошибка, всё равно считаем
+                }
+            });
+        }
+        
+        // Запасной таймер на 4 секунды (на всякий случай)
+        setTimeout(() => {
+            if (!imagesLoaded) {
+                imagesLoaded = true;
+                preloader.classList.add('hide');
+                setTimeout(() => {
+                    if (preloader.parentNode) preloader.remove();
+                }, 600);
+            }
+        }, 4000);
+    })();
+</script>
+</body>
+</html>
