@@ -393,12 +393,12 @@
             }
             
             .komp7 img {
-                width: 115%;
-                max-width: 1500px;
-                display: block;
-                margin: 0 auto;
-                margin-top: -90px !important;
-            }
+    width: 100% !important;
+    max-width: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+    margin-top: -90px !important; /* вернём поднятие вверх */
+}
             
             .komp8 img {
                 width: 70%;
@@ -871,6 +871,23 @@
 }
 
 
+/* РАСТЯГИВАЕМ 7 СЕКЦИЮ НА ВСЮ ШИРИНУ ЭКРАНА */
+@media (min-width: 768px) {
+    .komp7 {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .komp7 img {
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+        margin: 0 !important;
+        margin-top: -90px !important;
+    }
+}
     </style>
 </head>
 <body>
